@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+  php:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pep:/var/www/html
+    command: php -S 0.0.0.0:80
